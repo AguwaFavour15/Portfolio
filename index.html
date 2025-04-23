@@ -18,9 +18,78 @@
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://tawk.to/chat/67c1c501f9178c19076bf62d/1il6ej3r8">
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+              .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1.5s ease-out;
+        }
+        
+        .afe-logo {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 173, 255, 0.7);
+            animation: pulse 2s infinite;
+        }
+        
+        .progress-container {
+            width: 80%;
+            max-width: 400px;
+            height: 20px;
+            background: #2C3E50;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00adb5, #00fff5);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 173, 181, 0.5);
+        }
+        
+        .loading-text {
+            color: #fff;
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .loading-time {
+            color: #00fff5;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; text-shadow: 0 0 15px rgba(0, 173, 255, 1); }
+            100% { opacity: 0.8; }
+        }
+        
+        .content {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+        </style>
     </head>
 
     <body>
@@ -511,6 +580,73 @@
         <!-- Back to Top -->
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
+      
+ 
+    <div class="preloader">
+        <div class="afe-logo">AFE</div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="loading-text" id="loadingText">Loading awesome content...</div>
+        <div class="loading-time" id="loadingTime">0s / 90s</div>
+    </div>
+    
+ 
+
+    <script>
+        const preloader = document.querySelector('.preloader');
+        const progressBar = document.getElementById('progressBar');
+        const loadingText = document.getElementById('loadingText');
+        const loadingTime = document.getElementById('loadingTime');
+        const content = document.getElementById('content');
+        
+        const totalTime = 10; // 90 seconds
+        let timePassed = 0;
+        
+        // Array of loading messages for variety
+        const loadingMessages = [
+            "Loading awesome content...",
+            "Preparing your experience...",
+            "Almost there...",
+            "Final touches...",
+            "Just a moment longer..."
+        ];
+        
+        // Update progress every 100ms for smooth animation
+        const interval = setInterval(() => {
+            timePassed += 0.1;
+            const progress = (timePassed / totalTime) * 100;
+            
+            // Update progress bar
+            progressBar.style.width = `${progress}%`;
+            
+            // Update time display
+            loadingTime.textContent = `${timePassed.toFixed(1)}s / ${totalTime}s`;
+            
+            // Change loading message every 15 seconds
+            if (timePassed % 15 < 0.1) {
+                const randomMessage = loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
+                loadingText.textContent = randomMessage;
+            }
+            
+            // Complete after 90 seconds
+            if (timePassed >= totalTime) {
+                clearInterval(interval);
+                loadingText.textContent = "Complete!";
+                loadingTime.textContent = `${totalTime}s / ${totalTime}s`;
+                
+                // Fade out preloader
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                        content.style.display = 'block';
+                    }, 1500);
+                }, 500);
+            }
+        }, 100);
+    </script>
+
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -561,6 +697,21 @@
 
     updateDateTime();
     setInterval(updateDateTime, 1000);
-        </script>
-    </body>
+    
+    </script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/680965974667bd190d1c368b/1ipib9mgs';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+
+</body>
 </html>
